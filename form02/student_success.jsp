@@ -32,7 +32,7 @@
 	   		<td><%=stu.getNumber() %></td>         
 	   </tr>
 	    <tr>           
-	   		<d>이름</td>           
+	   		<td>이름</td>           
 	   		<td><%=stu.getName() %></td>         
 	   </tr>
 	    <tr>           
