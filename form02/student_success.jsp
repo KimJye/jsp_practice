@@ -25,11 +25,11 @@
 	<table class="table table-bordered">
 	   <tr>           
 	   		<td>ID</td>           
-	   		<td><%=stu.getId() %></td>         
+	   		<td><%=stu.getUserid() %></td>         
 	   </tr>
 	    <tr>           
 	   		<td>학번</td>           
-	   		<td><%=stu.getStudentNumber() %></td>         
+	   		<td><%=stu.getNumber() %></td>         
 	   </tr>
 	    <tr>           
 	   		<d>이름</td>           
@@ -37,11 +37,11 @@
 	   </tr>
 	    <tr>           
 	   		<td>학과</td>           
-	   		<td><%=stu.getDepartmentId() %></td>         
+	   		<td><%=stu.getDepartment() %></td>         
 	   </tr>
 	   <tr>           
 	   		<td>학년</td>           
-	   		<td><%=stu.getYear() %></td>         
+	   		<td><%=stu.getGrade() %></td>         
 	   </tr>
 	   </table>
 	</div>
