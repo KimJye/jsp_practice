@@ -9,8 +9,12 @@
 	String pg = request.getParameter("pg");
 	if(pg !=null)currentPage = Integer.parseInt(pg);
 	
-	List<User> list = UserEditDAO.findAll(currentPage,pageSize);
 	int recordCount = UserEditDAO.count();
+	int lastPage=(recordCount+pageSize-1)/pageSize;
+	if(currentPage>lastPage)currentPage=lastPage;
+	
+	List<User> list = UserEditDAO.findAll(currentPage,pageSize);
+	
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,7 +54,7 @@
 	</thead>
 	<tbody>
 		<% for(User user : list){ %>
-			<tr data-url="userEdit.jsp?id=<%=user.getId() %>">
+			<tr data-url="userEdit.jsp?id=<%=user.getId() %>&pg=<%=currentPage%>">
 				<td><%=user.getId() %></td>
 				<td><%=user.getUserid()%></td>
 				<td><%=user.getName() %></td>

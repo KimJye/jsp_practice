@@ -8,6 +8,7 @@
 	String 에러메시지 = null;
 	String s1 = request.getParameter("id");
 	int id = Integer.parseInt(s1);
+	String pg=request.getParameter("pg");
 	
 	String able = request.getParameter("able");//동의여부받아오기
 	if (able == null) able = "";
@@ -18,6 +19,7 @@
 		user = UserEditDAO.findOne(id);
 	}else{
 		user = new User();
+		user.setId(id);
 		user.setUserid(request.getParameter("userId"));
 		user.setName(request.getParameter("name"));
 		user.setEmail(request.getParameter("email"));
@@ -45,7 +47,7 @@
 		}
 		else{
 			UserEditDAO.update(user);
-			response.sendRedirect("user_first.jsp");
+			response.sendRedirect("user_first.jsp?pg="+pg);
 			return;
 		}
 	}
@@ -101,10 +103,10 @@
 		</select>
 	</div>
 	 <div class="radio">
-  		<label><input type="radio" name="able" value="true"<%="true".equals(able)?"checked":"" %>>동의</label>
+  		<label><input type="radio" name="able" value="true"<%=user.isEnabled()==true? "checked":"" %>>동의</label>
     </div>
     <div class="radio">
- 	 	<label><input type="radio" name="able" value="false"<%= "false".equals(able)?"checked":"" %>>부동의</label>
+ 	 	<label><input type="radio" name="able" value="false"<%=user.isEnabled()==false?"checked":"" %>>부동의</label>
     </div>
 	<div class="form-group">
 		<label>사용자 유형</label>
