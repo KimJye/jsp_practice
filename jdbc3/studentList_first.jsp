@@ -9,9 +9,11 @@
 	String pg = request.getParameter("pg");
 	if(pg !=null)currentPage = Integer.parseInt(pg);
 	
-	List<Student> list = StudentDAO.findAll(currentPage,pageSize);
 	int recordCount = StudentDAO.count();
-
+	int lastPage=(recordCount+pageSize-1)/pageSize;
+	if(currentPage>lastPage)currentPage=lastPage;
+	
+	List<Student> list = StudentDAO.findAll(currentPage,pageSize);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,7 +35,7 @@
 </head>
 <body>
 
-<div class="table table-bordered table-condensed">
+<div class="containers">
 <h1>학생목록</h1>
 
 <table class="table table-bordered table-condensed">
@@ -48,7 +50,7 @@
 	</thead>
 	<tbody>
 		<% for(Student student : list){ %>
-			<tr data-url="studentEdit1.jsp?id=<%=student.getId() %>">
+			<tr data-url="studentEdit1.jsp?id=<%=student.getId() %>&pg=<%=currentPage%>">
 				<td><%=student.getId() %></td>
 				<td><%=student.getStudentNumber() %></td>
 				<td><%=student.getName() %></td>

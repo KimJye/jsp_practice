@@ -9,11 +9,13 @@
 	String s1 = request.getParameter("id");
 	int id = Integer.parseInt(s1);
 	Student student = null;
+	String pg=request.getParameter("pg");
 	
 	if(request.getMethod().equals("GET")){
 		student = StudentDAO.findOne(id);
 	}else{
 		student = new Student();
+		student.setId(id);
 		student.setStudentNumber(request.getParameter("studentNumber"));
 		student.setName(request.getParameter("studentName"));
 		String s2 = request.getParameter("departmentId");
@@ -31,7 +33,7 @@
 			에러메시지 = "학년을 입력하세요";
 		else{
 			StudentDAO.update(student);
-			response.sendRedirect("studentList_first.jsp");
+			response.sendRedirect("studentList_first.jsp?pg="+pg);
 			return;
 		}
 	}
