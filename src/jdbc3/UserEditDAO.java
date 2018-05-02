@@ -98,7 +98,7 @@ public class UserEditDAO {
 
 	   public static void update(User user)throws Exception{
 		   String sql ="UPDATE user SET userid=?, name=?, email=?, departmentId=?, enabled=?, userType=? " +
-				   		"WHERE id=?";
+				   		" WHERE id = ?";
 		   try(Connection connection = DB.getConnection("student1");
 			   PreparedStatement statement = connection.prepareStatement(sql)){
 			   statement.setString(1, user.getUserid() );
@@ -107,6 +107,7 @@ public class UserEditDAO {
 			   statement.setInt(4, user.getDepartmentId());
 			   statement.setBoolean(5, user.isEnabled());
 			   statement.setString(6, user.getUserType());
+			   statement.setInt(7, user.getId());
 			   statement.executeUpdate();
 		   }
 	   }
