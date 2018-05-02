@@ -66,17 +66,18 @@ public class StudentDAO {
 
 	   }
 
-	   public static void update(Student student)throws Exception{
-		   String sql ="UPDATE student SET studentNumber=?, name=?, departmentId=?, year=? " +
-				   		"WHERE id=?";
-		   try(Connection connection = DB.getConnection("student1");
-			   PreparedStatement statement = connection.prepareStatement(sql)){
-			   statement.setString(1, student.getStudentNumber());
-			   statement.setString(2, student.getName());
-			   statement.setInt(3,student.getDepartmentId());
-			   statement.setInt(4, student.getYear());
-			   statement.setInt(5, student.getId());
-			   statement.executeUpdate();
-		   }
-	   }
+	    public static void update(Student student) throws Exception {
+	        String sql = "UPDATE student SET studentNumber=?, name=?, departmentId=?, year=? " +
+	                     " WHERE id = ?";
+	        try (Connection connection = DB.getConnection("student1");
+	             PreparedStatement statement = connection.prepareStatement(sql)) {
+	            statement.setString(1, student.getStudentNumber());
+	            statement.setString(2, student.getName());
+	            statement.setInt(3, student.getDepartmentId());
+	            statement.setInt(4, student.getYear());
+	            statement.setInt(5, student.getId());
+	            statement.executeUpdate();
+	        }
+	    }
+
 }
