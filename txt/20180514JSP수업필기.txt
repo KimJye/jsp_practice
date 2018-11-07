@@ -1,0 +1,26 @@
+﻿20180514 JSP 수업 필기
+
+* static - 실행 하기 전(컴파일할때) 라는 뜻. ex) html
+* dynamic - 실행 할 때 라는 뜻.  ex) JSP
+
+* dynamic sql : 실행할때 sql 명령이 변경 되는 것.
+
+* SQL Injection 공격 
+ - request parameter 문자열을 그대로 사용하여 sql 문을 생성하는 것은 위험하다.
+ - 웹 브라우저에서 입력되어 전달 되는 값 = request parameter
+ - 웹 브라우저에서 전달되는 문자열을 그대로 sql에서 조합하여 서버에서 실행하는 것은 위험하다.
+ - 해커는 웹브라우저의 개발자창(F12)을 열어서 select 태그를 아래의 코드로 수정할 수 있다. 
+ - <input type="text" name="order" value="ID DESC; DELETE FROM Student" /> 
+
+* SQL Injection 공격 해결 방법
+- PreparedStatement 클래스의 setString, setInt 메소드를 호출하여, 물음표 파라미터에 값을 삽입하는 것은 SQL Injection 공격으로부터 안전하다. PreparedStatement 내부에서 검사를 하기 때문이다.
+- order by 뒤에는 ? 쓸수 없을때는 request.getParameter값을 실제값을 찾도록하기(매핑,look up)하는 방법.
+
+* 값 넣을 때만 sql에서 ? 사용하고 필드명은 문자열을 넣어준다.
+
+* referential(참조), integrity(무결성), constrait(제약), viloation(위반), error(에러) = foreign key constraint violation error. (참조 무결성 제약 위반 에러)
+ - 학생 테이블에 departmentId가 있다. 이때 학과를 지우면 foreign key 에이해서 에러남.
+
+ Department <--------Student
+		   departmentId
+

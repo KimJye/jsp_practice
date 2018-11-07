@@ -1,0 +1,19 @@
+﻿2018.03.19 jsp 수업 필기
+
+*http: 웹서버와 tomcat(사실은 서블릿을 실행하는것)과같은것의 사이를 연결해주는 것.
+
+*jsp파일 실행하면 servlet 클래스로 자동 변환된다음 servlet container에서 실행되는 것임.
+
+*servlet은 servlet container에서 실행되는 자바 클래스임.
+
+*build path 관리는 eclipse에서 현재 프로젝트에서 오른쪽버튼->맨밑 properite->java Builde Path->Libraries에서 에러나잇는거 remove하고
+반드시 잇어야하는게 jre(jvm과 표준라이브러리들어있음),jdk(jre와 java compiler(개발도구))
+
+
+*jsp 파일을 servlet클래스로 변환을하는데 이때 servlet 클래스 메소드 한개에서 실행된다.
+그렇다면 메소드 중간에서 return 하게 되면 어떻게 되는가?(jsp중간에 return)-> 실행도 안되고 출력도 안된다.
+
+
+*<%!~~~%> 이거 제외한 나머지는 servlet 메소드 한개에 다 들어가고 저거는 그 메소드 바깥으로 들어간다.
+예를 들어 <%! int a=3%> 이면 a는 멤버변수이다. 멤버변수는 메소드 밖이다.
+또 <%!int sub(){return}%>이면 sub()는 메소드선언이다.

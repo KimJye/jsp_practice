@@ -1,0 +1,48 @@
+﻿2018.03.12 jsp 수업
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 태그
+->웹브라우저에게 이 내용이 utf-8이다. 라는 것을 알려주는 것임.
+
+배치:publish(웹일경우만) or deploy(더 넓은 개념.)
+
+html(정적)
+	->웹브라우저가 서버에 요청(HttpRequest)/ 웹서버(톰캣은 was서버지 웹서버가 아님)가 웹브라우저에게 줌(HttpResponse)
+	->웹서버에서 아무것도 안하고 인코딩여부없이 그대로 웹브라우저에 보내줌
+
+*(리눅스-아파치-웹서버)
+
+웹브라우저에서 소스보기 하면 웹브라우저가 웹서버에서 받은 response(html 소스)를 보여준다.
+
+정적일때는 소스보기 하면 이클립스내용과 같을 것이다.
+
+
+JSP 스크립릿 태그 (scriptlet tag)
+
+		
+
+*sts에서
+	window-show view- server에서 pivotal tc Server어쩌구저쩌구가 잇어야 없으면 server에서 연결된 서버가 없다고하면 새 서버를 만들어라.
+	대화상자가 나오면 sts 설치 폴더 들어가 서버의 버전을 보고 골라준다 그리고 next. create instance에서 base 선택 후 base_instance 이름 아무거나 next next finsh 까지
+
+ 
+
+
+	*JSP 태그의 종류 
+
+
+형태 이름 
+
+<%@  선언             %> JSP 선언 태그      -> 서버에 보낼때 쓰는. 예를 들어 문자 인코딩
+
+<%   Java Statement   %> JSP Scriptlet 태그 
+
+<%=  Java Expression  %> JSP Expression 태그 -> 값이 있는 것
+
+
+* 하나하나 컴파일(파일 하나하나를 변환)한것을 묶어 놓은것을 빌드(컴파일 포함)라고 한다.
+
+빌드된 결과를 서버에 deploy또는 publish 한다.그리고 실행한다. 입클립스내에서 웹브라우저가 자동으로 뜨고 hello.jsp 파일을 요청한다.
+동적인 파일이기때문에 hello.jsp를 그대로 읽어 보내는게 아니라 실행하여 샐행결과를 웹브라우저에게 보낸다.
+html 태그부분은 그대로 출력
+java 코드는 실행한다. 자바코드가 출력하는 것만 출력한다.

@@ -1,0 +1,76 @@
+﻿20180418 JSP 수업 필기
+
+<페이지 단위 조회>
+
+* currentPage라는 변수에는 페이지 번호가 들어있다.
+* pageSize라는 변수에는 몇개씩 보여주는 것.
+* LIMIT (currentPage-1)*pageSize, pageSize;
+
+* 내가 만든 확장태그 ex)페이지 번호, 로그인 박스, 숫자찍는것(3자리마다 콜론찍는것)
+
+* 날짜 시 분 초 로 출력, 날짜가 입력된 문자열을 파싱해서 Date 클래스를 쓰는것 SimpleDateFormat을 쓴다.
+
+* <my:dateTime format="yyyy-MM-dd"/>데이트 값을 안주면 현재 시각을 연 월 일로만 찍고
+
+*<my:dateTime format="yyyy-MM-dd HH:mm"/> 데이트 값을 안주면 현재 시각을 연 월 일 시 로만 찍고
+
+*<my:dateTime format="yyyy-MM-dd HH:mm:ss" date="<%=new Date()%>/> 날짜가 주어지면 연 월 일 시 분초로 찍는다.
+
+* my는 확장명이고 : 뒤에는 태그이다.
+
+* date가 없으면 현재 시각으로 바꾼다.
+
+* 확장 태그를 사용하려면 <%@ taglib tagdir="/WEB_INF/tages" prefix="my"%>
+
+* 첫번째 페이지에서 페이지 사이즈만큼만 보여주라. LIMIT setInt(1,(currentPage-1)*pageSize),setInt(2,pageSize)
+
+* count()메소드는 student 테이블의 전체 레코드 수를 출력하는 것이다. resultSet.getInt(1)한다.
+
+* findAll()은 while문 하면서 여러개 레코드를 하나하나 꺼내기 때문이다.
+
+* count()은 if문 이다. 조회조건이 한개이기 때문이다.
+
+* count()메소드를 구현한 이유는 페이지 레코드를 찍을때 전체 페이지 수를 찍어야하기 때문이다.
+  예를 들어서 한 페이지에 10개씩 찍고 레코드 숫자가 72개일때 페이지 count메소드는 72를 리턴하고 전체 페이지 수는 8페이지가 되는데
+  이 계산은 (레코드 수/10)
+
+* 자바에서 반올림 round,  반내림 flour ,무조건 올리기는 ceil
+
+* Integer는 반으로 나누면 무조건 내림이다.
+
+* Integer에서 무조건 올림의 계산은 (분자+(분모-1))/분모 이다. 무조건 내림의 계산은 (분자/분모)이다.
+
+* studentList1.jsp 는 10개 레코드만 출력
+
+* 버튼 누를때마다 페이지 번호가 늘어나고 줄어나는 기능을 구현하라.
+
+* studentList2.jsp 는 페이지를 왓다갓다하는 기능을 구현한 것이다.
+
+* pg값은 처음에 null이꺼내지니까 currentPage는 1이다. 만약에 pg가 꺼내지면 pg가 currentPage에 대입된다.
+
+* recordCount : 총 레코드 숫자
+
+* pageCount : 무조건 올림
+
+* if(currentPage>1){//이전 페이지 버튼, currentPage가 1일때는 이전버튼이 나오면 안된다.
+	<a class="btn btn-default" gref="studentList2.jsp?pg=<%=currentPage-1%>"> &lt;</a>
+	//여기서 &lt는 escape code라고 부르는데, xml 특수문자출력할때쓴다. 예를 들어 줄바꿈문자
+			특수문자 '<'이것을 의미한다.
+	//이전버튼을 누르면 버튼이 a 태그로 구현되어있기 때문에 studentList2.jsp로 다시 요청이 되면서 
+	  pg가 currentPage-1로 바뀐다.
+  if(currentPage<pageCount){//다음 페이지 버튼, currentPage가 마지막일때는 마지막 버튼이 나오면 안된다.
+	<a class="btn btn-default" gref="studentList2.jsp?pg=<%=currentPage-1%>"> &gt;</a> 
+	//&gt는 '>'를 의미한다.
+	//&amp는 '&'을 의미한다. xml 파일에서 url을 입력할때 query string에서 써준다.
+
+* studentList2.jsp 실행 과정 분석
+
+* pagination.tag : page번호 출력하는 확장태그
+ // 정규식과 여러가지 메소드 이해해보기
+
+* studentList3.jsp
+
+* <my:pagination pageSize="<%= pageSize %>" recordCount="<%= recordCount %>" queryStringName="pg" />
+ //queryStringName="pg" ->현재 url에서 pg값을 꺼낸다.
+
+* 레코드를 라디오버튼 (enabled), 체크박스 버튼(관리자교수학생)으로 조회조건으로 구현해보기

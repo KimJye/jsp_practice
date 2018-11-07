@@ -1,0 +1,69 @@
+﻿20180521JSP 수업 필기
+
+* web server : 정적인 파일 읽어들이기 - html, img ->아파치또는 엔진엓
+* web application server:   내부에서 실행하는 것 -> 톰캣
+* Servlet container == jsp container : jsp 파일or서블릿을 실행하는 서버 ->톰캣
+* web server -> was -> container
+* servlet class
+- jsp container에서 JSP 파일을 실행할 때 
+  먼저 JSP 파일을 servlet class 소스코드 파일로 변환하고  그 소스코드 파일을 컴파일하여 실행한다.
+
+*servlet container
+- jsp container에서 실행되는 것은, jsp 파일이 아니다. 
+ jsp 파일이 servlet class로 자동 변환되고, 생성된 servlet class 가 실행된다. 
+그래서 jsp container 라는 명칭보다, servlet container 라는 명칭이 더 정확하다.
+
+* applet 기술과 servlet 기술
+- servlet : 서버에서 돌아가는 자바
+- applet : 웹브라우저에서 돌아가는 자바 ->flash로 제압 -> js가 대세
+
+* JSP 기술로 업그레이드
+ - asp : 마이크로소프트회사에서 만듦. html 파일에 사이사이에 자바코드를 넣는 형태
+ - jsp : tomcat 서버가 container로 자동 변환. 업그레이드.
+
+* JSP와 Servlet 클래스 선택 기준
+- JSP 장점 : html 태그 출력
+- Servlet 장점 : html 태그 출력 아닌 것을 출력할 때-이미지 출력, 파일 출력, 동적
+
+* URL 
+- 상대 url : /로 시작 안한 것.
+ 
+*상대 url이 절대 url로 바뀌는 계산 방법
+-현재 웹브라우저 창의 URL이 "http://localhost:8080/lecture1/file1/upload1.jsp" 이라고 하자
+ - 이 입력 폼이 submit 될 때, 서버에 요청되는 URL은  
+  "http://localhost:8080/lecture1/file1/FileUPloadServlet1 ->절대url
+
+* 상대 url : 현재 url에 파일명 붙이기
+* 절대 url : /로 시작 한 것.
+
+* 절대 url경우에는 서버 주소와만 결합이 되고 나머지 경로는 다 지워버린다.
+* 상대 url경우에는 현재 웹브라우저 주소칸 url에 파일명 제거하고 url붙이기
+
+* context path 
+ -String s = request.getContextPath();
+
+*절대 URL 사용
+- JSP 파일에서 절대 URL을 사용하려면, URL에 Context Path(여기서는 lecture1)부분이 필요하다.
+-<form action="<%= request.getContextPath() %>/file1/FileUploadServlet1" method="post">
+
+*@WebServlet 애너테이션
+ - 절대경로 url 적어줄때 context Path를 넣으면 안된다.
+ - /여부 상관없이 다 절대경로 url이 된다.
+ - 
+
+* @
+ - annotation에 url을 적을 때 선두 '/' 문자 유무와 무관하다. 언제나 절대 URL
+ - 단, context path는 생략해야 한다.
+
+* 프로젝트 폴더와 웹 애플리케이션 폴더
+- 프로젝트 컴파일(파일 하나) 혹은 빌드하면 .war 빌드 결과파일이 만들어지고 톰캣서버폴더에 자동으로 설치해준다.
+ 이것을 eclipse가 해준다. 빌드 된 파일만 들어있다. 자바를 컴파일한 class파일만 들어있다.
+ 여기가 web application folder다.
+ 프로젝트 폴더는 이클립스 밑에 있고 .java파일이 있고
+ 웹 애플리케이션 폴더는 web application folder 밑에 있고 .class파일이 있다.
+
+* HTTP request forward
+* 저장하고 목록으로 나갈때 - redirect
+
+
+

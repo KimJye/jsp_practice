@@ -1,0 +1,15 @@
+﻿1.버튼 
+2. db 조회
+3. 입력
+
+4. 합치기 -> 1. 2. 3
+
+
+set @name='';//mysql은 변수가 @이다.
+set @departmentId=0; 
+select s.*, d.departmentName
+form student s left join department d on d.id = s.departmentId
+where
+((@name is null) OR (@name = '') OR(s.name = concat(@name +'%')))
+and((@departmentId=0) OR (@departmentId=s.departmentId))
+

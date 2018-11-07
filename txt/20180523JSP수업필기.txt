@@ -1,0 +1,21 @@
+﻿20180523 JSP 수업 필기
+
+* 데이터 저장 객체
+- pageContext : 현재 페이지가 실행되는 동안에만 보관.(jsp에서 지역벼수와 같음=메소드호출될때 지역변수)
+- request : request 요청을 받고, response를 웹브라우저에 출력하는 동안에만 보관. (request forward에 딱 좋음.)
+- session : 로그아웃 할 때까지 보관(사용자마다 따로 소유함)
+- application : 웹/앱 종료할때까지 보관(모든 사용자가 공유)
+
+*request forward 데이터 전달 : request 객체에 저장하여 전달.
+
+*redirect 데이터 전달 : URL query string으로 전달
+
+*request forward 명령
+- jsp 파일에 구현 <jsp:forward page="이동할URL"/>
+-servlet 클래스에 구현 request.getRequestDispatcher("이동할URL").forward(request, response);
+
+*파일 업로드
+- 저장 : 운영체제 경로
+- 다운 : 현재 웹 프로젝트의 url
+
+* a href="url" target="blank">

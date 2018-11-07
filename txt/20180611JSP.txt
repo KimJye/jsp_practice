@@ -1,0 +1,55 @@
+﻿20180611 JSP <고웹 구현시험 답>
+Select ..from..Where..
+Order by 표현식1, 표현식2, 표현식3 DESC, 표현식4 DESC
+
+od 변수 값이 0일때,
+ 표현식 1 값은 a.id 필드 값이 되고,
+ 나머지 표현식들의 값은 전부 null이 된다.
+ 즉 
+ select .. from..where..
+ order by a.id, null,null,null
+ 문장과 실행 결과가 같다.
+
+od 변수 값이 1일 때, 
+ 표현식2 값은 u.name 필드값이 되고, 
+ 나머지 표현식들의 값은 전부 null 이 된다. 
+ 즉 
+ SELECT .. FROM .. WHERE .. 
+ OREDR BY null, u.name, null, null 
+ 문장과 실행 결과가 같다.
+ 
+od 변수 값이 2일 때, 
+ 표현식3 값은 u.name 필드값이 되고, 
+ 나머지 표현식들의 값은 전부 null 이 된다. 
+ 즉 
+ SELECT .. FROM .. WHERE .. 
+ OREDR BY null, null, u.name DESC, null 
+ 문장과 실행 결과가 같다.
+
+* 트랜젝션(transaction)- RDB SQL
+- Atomicity : 명령 전체가 성공하든지 실패하든지. 부분 성공 실패 없음. 
+- Consistoncy : 데이터가 inconstancy하지 않게 제약을 걸어주는 것. unique, primary, not null 또는 표현식 과 같은 것.constain한 데이터. 
+	      대표적인 에러: consistoncy binary error ,foriegn key error or referencal binary error,
+- Isolation : 격리. 트랜젝션이 여러개 동시에 진행되더라고 보호받아야 한다.
+	   공유데이터 보호하는 방법은 lock하면 된다. 
+	   Isolation 보호 단계가 4단계가 있다.
+	   게시판이나 블로그는 lsolation 단계 낮은것.
+	  금전적 계산이 필요한 곳에는 Isolation 단계가 높게.
+  	   출석부는 충돌확률이 적어서 Isolation 단계 낮은것.
+  	   수강신청은 Isolation 단계 높은것.
+- Durability : 한번 커밋된 데이터가 날라가지 않게 보장된다는 것. 예를 들면 백업
+
+=> ACID를 구현한 것.
+=> SQL 명령이  DB 엔진에서 실행될 때 transaction 단위로 실행됨
+=> begin 트랜젝션을 사용할 때는 sql명령들을 여러개로 묶어서 transaction을 사용하고 싶을때이다.
+=> mysql 이 아닌 sql,oracle에는 표현식 constaint 가능하다.
+
+* 자바에서 데드락 구현하기 : 자바 멀티스레드 구현해보자.......
+
+<파일 다운로드 배경지식>
+
+* 톰캣은 서블릿컨테이너
+* 상태코드- 완성 : 200, 알수 없는 :500, not find: 404
+* 웹 프로그래머를 위한 서블릿 컨테이너의 이해 - 한빛출판네트워크 책 읽기 =>서블릿 내부구조
+* JVM 내부 => 1. garbage collection 2. 성능(자바)
+* 

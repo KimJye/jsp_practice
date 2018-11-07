@@ -1,0 +1,64 @@
+﻿2018.05.02 JSP 수업 필기
+
+< 데이터 삽입, 삭제 >
+
+- 자바스크립트 onclick 애트리뷰트에다가 한다.
+
+- 관계형 DB의 트랜잭션(DB 명령or작업) 특징 : ACID -> 디비엔진이 보장함.
+	
+	Atomicity => 하나의 작업은 한 덩어리로 성공 or 실패이다. 부분실패와 부분성공은 불가능하다.
+	Consistency => 일관성 유지,무결성, 결함이 없다.
+	Isolation
+	Durability
+	
+	Primary Key 값 중복 불가.
+	nullable, not nullable 필드(필드에 null값이 들어갈수없다.)
+	Design key가 참조하는 레코드 삭제 불가(referential integrity violation(참조 무결성 위반) 에러
+
+- int lastPage = (recordCount + paeSize -1) / pageSize;// 마지막 페이지 계산= 총 페이지수. 올림계산을 위해서 더하고 -1하고 나눈다.
+  if(currentPage > lastPage) currentPage = lastPage;//마지막 페이지를 구하는 이유는 현재페이지가 마지막페이지보다 크면 문제가 있으므로 현재페이지를 마지막페이지로 제한하려고 만든것이다.
+	// currentPage = Math.min(currentPage.lastPage);//min메소드는 두 값중에 작은 값을 리턴한다. 결국 위에 문장과 같다.
+
+- if(count<0) count =0; // 서로 같은 코드이다. count=Math.max(count,0);
+
+- #createButton{margin-left:590px; margin-botton:4px;}//학생등록버튼을 표의 오른쪽 끝으로 붙게하기 위해서.하지만 이런식으로 구현하는 것은 바람직하지않다. 따라서 픽셀 단위보다는 정렬 개념으로 하는 것이 낫다. 오른쪽 정렬을 하려면 css로 하면 된다.
+
+- a태그로 학생 등록 버튼을 만들었기 때문에 학생등록버튼을 studentCreate1.jsp로 그냥 넘어간다.
+
+- 데이터를 수정한 후 현재 페이지로 다시 가고싶으면 쿼리스트링에 페이지 번호를 적어주면 된다.
+  무조건 1번 페이지로 가는 이유가 쿼리스트링에 pg값을 안넣어주기 때문이다. 
+  따라서 response.sendRedirect에서 pg값을 같이 주면 된다. <tr data-url="studentEdit1.jsp?id=<%= student.getId() %>&pg=<%= currentPage %>"> 
+  그리고 pg값을 꺼내고  response.sendRedirect("studentList1.jsp?pg=" + pg); 로 보내면 된다.
+
+- 현재 페이지 ,수정후 검색 조건 그대로, 정렬( 이전 정렬 순서) 구현 응용 해보기.
+
+- 삭제 버튼 :  onclick="return confirm('삭제하시겠습니까?')"> 
+
+< 학생 삽입 페이지>
+
+- 학생 입력 폼이 처음 뜰때 초기값으로 빈 문자열과 학년은 1학년. 날짜는 오늘 날짜로 초기화하는것이 적절할듯하다.
+
+- response.sendRedirect("studentList1.jsp?pg=99999");// pt=99999는 맨 마지막 페이지로 가려고 귀찮아서 저렇게 해버림. 99999>lastPage 때문에 currentPage가 9999가 아니라 lastPage로 바뀐다.
+
+- location.href는 웹 페이지에서 주소값을 입력하고 엔터치는 것과 같기때문이다. 그래서 이때는 get방식이다.
+
+- Integer.paseInt(s);
+  Double.parseDouble(s);
+  SimpleDateFormat format = new.....;// 날짜 사용할때.
+  format.parse(s);
+//parse는 잘못입력했을때 에러 날 확률이 높다. 따라서 아래와같이 try catch로 묶어주고 default로 정해준다.
+
+ try{
+	int year = Integer.paseInt(s3);
+	student.setYear(year);
+ }carch(Exception ex){
+}
+
+ try{
+	student.setYear(Integer.parseInt(s3));
+ }catch(Exception ex){
+}
+
+- DB 정규화의 목적: 안정성,확장성,안정성, 중복 데이터 제거
+
+
